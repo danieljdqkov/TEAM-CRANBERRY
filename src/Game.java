@@ -11,8 +11,11 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel{
 	    Ball ball = new Ball(this);
-		Racquet racquet = new Racquet(this, 80);   // second property is racquet lenght
-		Racquet2 racquet2 = new Racquet2(this, 60);
+	    Racquet racquet = new Racquet(this, 80, Color.RED, KeyEvent.VK_Q,
+				KeyEvent.VK_A, "left"); // second property is racquet
+													// length
+		Racquet racquet2 = new Racquet(this, 80, Color.BLACK, KeyEvent.VK_O,
+				KeyEvent.VK_L, "right");
 
 		public Game() {
 			addKeyListener(new KeyListener() {

@@ -7,10 +7,19 @@ public class Racquet {
 	int ya = 0;
 	private Game game;
 	private int racquetLenght;	
+	Color color;
+	int upKey;
+	int downKey;
+	String position="";
 	
-	public Racquet(Game game, int racquetLenght) {
+	public Racquet(Game game, int racquetLenght, Color color,
+			int upKey, int downKey, String position) {
 		this.game= game;
-		this.racquetLenght = racquetLenght;		
+		this.racquetLenght = racquetLenght;
+		this.color = color;
+		this.upKey = upKey;
+		this.downKey = downKey;
+		this.position = position;
 	}
 	
 	public int getY() {
@@ -31,7 +40,7 @@ public class Racquet {
 	
 	public void move() {
 		if (y + ya > 0 && y + ya < game.getHeight()-this.getLenght())
-			y = y + ya;
+			y = y + ya;		
 		
 		if (y + ya <= 0) {
 			y = game.getHeight() - this.getLenght();
@@ -43,8 +52,13 @@ public class Racquet {
 	}
 
 	public void paint(Graphics2D g) {
-		g.setColor(Color.BLUE);
-		g.fillRect(5, y, 10, racquetLenght);
+		g.setColor(this.color);
+		if (this.position == "left") {
+			g.fillRect(5, y, 10, racquetLenght);
+		}else if (this.position == "right") {
+			g.fillRect(770, y, 10, racquetLenght);
+		}
+		
 	}
 
 	public void keyReleased(KeyEvent e) {
@@ -52,9 +66,9 @@ public class Racquet {
 	}
 
 	public void keyPressed(KeyEvent e) {
-		if (e.getKeyCode() == KeyEvent.VK_Q )
+		if (e.getKeyCode() == this.upKey)	
 			ya = -1;
-		if (e.getKeyCode() == KeyEvent.VK_A)
+		if (e.getKeyCode() == this.downKey)
 			ya = 1;
 	}
 }
