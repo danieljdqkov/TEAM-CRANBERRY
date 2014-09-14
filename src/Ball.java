@@ -1,6 +1,8 @@
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
+import javax.swing.JOptionPane;
+
 public class Ball {
 	private static final int DIAMETER = 30;
 	int x = 0;
@@ -14,29 +16,35 @@ public class Ball {
 	}
 
 	void move() {
-		if (x + xa < 0)
-			xa = 1;
-		if (x + xa > game.getWidth() - DIAMETER)
-			xa = -1;
-		if (y + ya < 0)
-			ya = 1;
-		if (y + ya > game.getHeight() - DIAMETER)
-			ya = -1;  
-		if (y + ya > game.getHeight() - DIAMETER)
+		if (this.x + this.xa < 0){
 			game.gameOver();
-		if (collision()){
-			ya = -1;
-			y = game.racquet.getY() - DIAMETER;
 		}
-		x = x + xa;
-		y = y + ya;
+		if (this.x + this.xa > game.getWidth() - DIAMETER){
+			game.gameOver();
+		}
+		if (this.y + this.ya < 0){
+			this.ya = 1;
+		}
+		if (this.y + this.ya > game.getHeight() - DIAMETER){
+			this.ya = -1;  
+		}
+		if (leftCollision()){
+			this.xa = 1;
+		}
+		if (rightCollision()){
+			this.xa = -1;
+		}
+		this.x = this.x + this.xa;
+		this.y = this.y + this.ya;
 		
 	}
 		
-	private boolean collision() {
-		return game.racquet.getBounds().intersects(getBounds());
+	private boolean leftCollision() {
+		return game.racquet.getLeftBounds().intersects(getBounds());
 	}
-
+	private boolean rightCollision() {
+		return game.racquet2.getRightBounds().intersects(getBounds());
+	}
 	
 	public void paint(Graphics2D g) {
 		g.fillOval(x, y, DIAMETER, DIAMETER);

@@ -12,7 +12,7 @@ public class Racquet {
 	int upKey;
 	int downKey;
 	String position="";
-		
+	
 	public Racquet(Game game, int racquetLenght, Color color,
 			int upKey, int downKey, String position) {
 		this.game= game;
@@ -40,24 +40,16 @@ public class Racquet {
 	}
 	
 	public void move() {
-		if (y + ya > 0 && y + ya < game.getHeight()-this.getLenght())
-			y = y + ya;		
-		
-		if (y + ya <= 0) {
-			y = game.getHeight() - this.getLenght();
-		}
-		
-		if (y + ya >= game.getHeight()-this.getLenght()) {
-			y = 0;
-		}
+		if (this.y + this.ya > 0 && this.y + this.ya < game.getHeight()-this.getLenght())
+			this.y = this.y + this.ya;		
 	}
 
 	public void paint(Graphics2D g) {
 		g.setColor(this.color);
 		if (this.position == "left") {
-			g.fillRect(5, y, 10, racquetLenght);
+			g.fillRect(10, y, 10, racquetLenght);
 		}else if (this.position == "right") {
-			g.fillRect(770, y, 10, racquetLenght);
+			g.fillRect(774, y, 10, racquetLenght);
 		}
 		
 	}
@@ -73,7 +65,10 @@ public class Racquet {
 			ya = 1;
 	}
 	
-	public Rectangle getBounds() {
-		return new Rectangle(770, y, 10, racquetLenght);
+	public Rectangle getLeftBounds() {
+		return new Rectangle(10, y, 10, racquetLenght);
+	}
+	public Rectangle getRightBounds() {
+		return new Rectangle(774, y, 10, racquetLenght);
 	}
 }

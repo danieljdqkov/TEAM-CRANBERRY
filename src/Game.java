@@ -17,7 +17,7 @@ public class Game extends JPanel{
 													// length
 		Racquet racquet2 = new Racquet(this, 80, Color.BLACK, KeyEvent.VK_O,
 				KeyEvent.VK_L, "right");
-
+		
 		public Game() {
 			addKeyListener(new KeyListener() {
 				
@@ -57,7 +57,7 @@ public class Game extends JPanel{
 		}
 		
 		public void gameOver() {
-			JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+			JOptionPane.showMessageDialog(this, "Game Over","Game Over" , JOptionPane.YES_NO_OPTION);
 			System.exit(ABORT);
 		}
 
