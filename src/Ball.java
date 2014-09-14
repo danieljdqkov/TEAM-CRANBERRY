@@ -22,9 +22,19 @@ public class Ball {
 			ya = 1;
 		if (y + ya > game.getHeight() - DIAMETER)
 			ya = -1;  
-		
+		if (y + ya > game.getHeight() - DIAMETER)
+			game.gameOver();
+		if (collision()){
+			ya = -1;
+			y = game.racquet.getY() - DIAMETER;
+		}
 		x = x + xa;
 		y = y + ya;
+		
+	}
+		
+	private boolean collision() {
+		return game.racquet.getBounds().intersects(getBounds());
 	}
 
 	

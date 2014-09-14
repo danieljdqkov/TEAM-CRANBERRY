@@ -6,6 +6,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -19,17 +20,17 @@ public class Game extends JPanel{
 
 		public Game() {
 			addKeyListener(new KeyListener() {
-				@Override
+				
 				public void keyTyped(KeyEvent e) {
 				}
 
-				@Override
+			//	@Override
 				public void keyReleased(KeyEvent e) {
 					racquet.keyReleased(e);
 					racquet2.keyReleased(e);
 				}
 
-				@Override
+			//	@Override
 				public void keyPressed(KeyEvent e) {
 					racquet.keyPressed(e);
 					racquet2.keyPressed(e);
@@ -44,7 +45,7 @@ public class Game extends JPanel{
 			racquet2.move();			
 		}
 
-		@Override
+		//@Override
 		public void paint(Graphics g) {
 			super.paint(g);
 			Graphics2D g2d = (Graphics2D) g;
@@ -53,6 +54,11 @@ public class Game extends JPanel{
 			ball.paint(g2d);
 			racquet.paint(g2d);
 			racquet2.paint(g2d);
+		}
+		
+		public void gameOver() {
+			JOptionPane.showMessageDialog(this, "Game Over", "Game Over", JOptionPane.YES_NO_OPTION);
+			System.exit(ABORT);
 		}
 
 	public static void main(String[] args) throws InterruptedException {

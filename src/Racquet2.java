@@ -1,5 +1,6 @@
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 public class Racquet2 {
@@ -56,5 +57,9 @@ public class Racquet2 {
 			ya = -1;
 		if (e.getKeyCode() == KeyEvent.VK_L)
 			ya = 1;
+	}
+	
+	public Rectangle getBounds() {
+		return new Rectangle(770, y, 10, racquetLenght);
 	}
 }
