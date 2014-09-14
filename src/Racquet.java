@@ -31,7 +31,15 @@ public class Racquet {
 	
 	public void move() {
 		if (y + ya > 0 && y + ya < game.getHeight()-this.getLenght())
-			y = y + ya;		
+			y = y + ya;
+		
+		if (y + ya <= 0) {
+			y = game.getHeight() - this.getLenght();
+		}
+		
+		if (y + ya >= game.getHeight()-this.getLenght()) {
+			y = 0;
+		}
 	}
 
 	public void paint(Graphics2D g) {

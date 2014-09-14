@@ -10,7 +10,7 @@ import javax.swing.JPanel;
 
 public class Game extends JPanel{
 	// Ball ball = new Ball(this);
-		Racquet racquet = new Racquet(this, 100);   // second property is racquet lenght
+		Racquet racquet = new Racquet(this, 80);   // second property is racquet lenght
 		Racquet2 racquet2 = new Racquet2(this, 60);
 
 		public Game() {
