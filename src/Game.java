@@ -9,7 +9,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 public class Game extends JPanel{
-	// Ball ball = new Ball(this);
+	    Ball ball = new Ball(this);
 		Racquet racquet = new Racquet(this, 80);   // second property is racquet lenght
 		Racquet2 racquet2 = new Racquet2(this, 60);
 
@@ -35,7 +35,7 @@ public class Game extends JPanel{
 		}
 		
 		private void move() {
-			// ball.move();
+			ball.move();
 			racquet.move();
 			racquet2.move();			
 		}
@@ -46,7 +46,7 @@ public class Game extends JPanel{
 			Graphics2D g2d = (Graphics2D) g;
 			g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 					RenderingHints.VALUE_ANTIALIAS_ON);
-			// ball.paint(g2d);
+			ball.paint(g2d);
 			racquet.paint(g2d);
 			racquet2.paint(g2d);
 		}
@@ -65,7 +65,7 @@ public class Game extends JPanel{
 		while (true) {
 			game.move();
 			game.repaint();
-			Thread.sleep(10);
+			Thread.sleep(5);
 		}
 	}
 }
