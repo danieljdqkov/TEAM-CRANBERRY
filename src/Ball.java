@@ -21,7 +21,7 @@ public class Ball {
 		if (y + ya < 0)
 			ya = 1;
 		if (y + ya > game.getHeight() - DIAMETER)
-			ya = -1;
+			ya = -1;  
 		
 		x = x + xa;
 		y = y + ya;
