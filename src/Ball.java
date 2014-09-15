@@ -2,8 +2,6 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import javax.swing.JOptionPane;
-
 public class Ball {
 	public static int DIAMETER = 30;
 	int x = 0;
@@ -11,7 +9,7 @@ public class Ball {
 	int xa = 1;
 	int ya = 1;
 	Color color;
-	int pointscounter = 0;
+	public static int pointscounter = 0;
 	private Game game;
 
 	public Ball(Game game) {
@@ -23,7 +21,7 @@ public class Ball {
 			game.gameOver();
 		}
 		if (this.x + this.xa > game.getWidth() - DIAMETER) {
-			System.out.println(game.ball.pointscounter);
+			System.out.println(Ball.pointscounter);
 			game.gameOver();
 		}
 		if (this.y + this.ya < 0) {
@@ -34,15 +32,29 @@ public class Ball {
 		}
 		if (leftCollision()) {
 			this.xa = 1;
-			pointscounter++;
-		}
+			Ball.pointscounter++;
+			increaseDiff(Ball.pointscounter);
+		}							
 		if (rightCollision()) {
 			this.xa = -1;
-			pointscounter++;
-		}
+			Ball.pointscounter++;
+			increaseDiff(Ball.pointscounter);			
+		}		
 		this.x = this.x + this.xa;
 		this.y = this.y + this.ya;
-
+	}
+	
+	private void increaseDiff(int pointscounter) {
+		if (pointscounter > 0){
+			if (pointscounter % 15 == 0) {					
+				game.racquet.racquetLenght -= 12;
+				game.racquet2.racquetLenght -= 12;
+				Ball.DIAMETER -= 3;
+				if (pointscounter%30 == 0) {
+					Game.gameSpeed -= 1;
+				}	
+			}
+		}
 	}
 
 	private boolean leftCollision() {
@@ -54,7 +66,7 @@ public class Ball {
 	}
 
 	public void paint(Graphics2D g) {
-		g.setColor(color.ORANGE);
+		g.setColor(Color.ORANGE);
 		g.fillOval(x, y, DIAMETER, DIAMETER);
 	}
 

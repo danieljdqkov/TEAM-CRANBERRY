@@ -9,16 +9,15 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Game extends JPanel {
 	Ball ball = new Ball(this);
-	Racquet racquet = new Racquet(this, 80, Color.RED, KeyEvent.VK_Q,
+	Racquet racquet = new Racquet(this, 120, Color.RED, KeyEvent.VK_Q,
 			KeyEvent.VK_A, "left"); // second property is racquet
 									// length
-	Racquet racquet2 = new Racquet(this, 80, Color.BLACK, KeyEvent.VK_O,
+	Racquet racquet2 = new Racquet(this, 120, Color.BLACK, KeyEvent.VK_O,
 			KeyEvent.VK_L, "right");
-	int pointscounter = 0;
-
-	// count
+	public static int gameSpeed = 5;
 
 	public Game() {
 		addKeyListener(new KeyListener() {
@@ -42,7 +41,7 @@ public class Game extends JPanel {
 
 	}
 
-	private void move() {
+	private void move() {		
 		ball.move();
 		racquet.move();
 		racquet2.move();
@@ -71,22 +70,6 @@ public class Game extends JPanel {
 		Game game = new Game();
 		gameWindow.add(game);
 		
-		//changing difficulty block 
-		int difficultylevel = 0;
-		if (game.ball.pointscounter % 25 == 0) {
-			difficultylevel++;
-			if (difficultylevel == 1) {
-				//method for changing parameters for speed, racquets length and ball diameter 
-			}
-			if (difficultylevel == 2) {
-				//method for changing parameters for speed, racquets length and ball diameter
-			}
-			if (difficultylevel == 3) {
-				//method for changing parameters for speed, racquets length and ball diameter
-			}
-		}
-		// end block
-		
 		gameWindow.setSize(800, 400); // set size of the field
 		gameWindow.setVisible(true);
 		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -97,8 +80,8 @@ public class Game extends JPanel {
 		while (true) {
 			game.move();
 			game.repaint();
-			Thread.sleep(5);
-		}
+			Thread.sleep(gameSpeed);
 
+		}
 	}
 }

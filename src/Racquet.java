@@ -7,7 +7,7 @@ public class Racquet {
 	int y = 150;
 	int ya = 0;
 	private Game game;
-	private int racquetLenght;	
+	public int racquetLenght;	
 	Color color;
 	int upKey;
 	int downKey;
