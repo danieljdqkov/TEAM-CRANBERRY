@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import javax.swing.JOptionPane;
 
 public class Ball {
-	private static final int DIAMETER = 30;
+	public static int DIAMETER = 30;
 	int x = 0;
 	int y = 0;
 	int xa = 1;
