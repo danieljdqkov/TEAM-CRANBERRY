@@ -4,12 +4,12 @@ import java.awt.Rectangle;
 
 public class Ball {
 	public static int DIAMETER = 30;
-	int x = 0;
-	int y = 0;
-	int xa = 1;
-	int ya = 1;
+	public static int x = 0;
+	public static int y = 0;
+	public static int xa = 1;
+	public static int ya = 1;
 	Color color;
-	public static int pointscounter = 0;
+	public static int hitCounter = 0;
 	private Game game;
 
 	public Ball(Game game) {
@@ -17,40 +17,41 @@ public class Ball {
 	}
 
 	void move() {
-		if (this.x + this.xa < 0) {
-			game.gameOver();
+		if (Ball.x + Ball.xa < 0) {
+			game.blackScores();
+			
 		}
-		if (this.x + this.xa > game.getWidth() - DIAMETER) {
-			System.out.println(Ball.pointscounter);
-			game.gameOver();
+		if (Ball.x + Ball.xa > game.getWidth() - DIAMETER) {
+			game.redScores();
+			
 		}
-		if (this.y + this.ya < 0) {
-			this.ya = 1;
+		if (Ball.y + Ball.ya < 0) {
+			Ball.ya = 1;
 		}
-		if (this.y + this.ya > game.getHeight() - DIAMETER) {
-			this.ya = -1;
+		if (Ball.y + Ball.ya > game.getHeight() - DIAMETER) {
+			Ball.ya = -1;
 		}
 		if (leftCollision()) {
-			this.xa = 1;
-			Ball.pointscounter++;
-			increaseDiff(Ball.pointscounter);
+			Ball.xa = 1;
+			Ball.hitCounter++;
+			increaseDiff(Ball.hitCounter);
 		}							
 		if (rightCollision()) {
-			this.xa = -1;
-			Ball.pointscounter++;
-			increaseDiff(Ball.pointscounter);			
+			Ball.xa = -1;
+			Ball.hitCounter++;
+			increaseDiff(Ball.hitCounter);			
 		}		
-		this.x = this.x + this.xa;
-		this.y = this.y + this.ya;
+		Ball.x = Ball.x + Ball.xa;
+		Ball.y = Ball.y + Ball.ya;
 	}
 	
-	private void increaseDiff(int pointscounter) {
-		if (pointscounter > 0){
-			if (pointscounter % 15 == 0) {					
+	private void increaseDiff(int hits) {
+		if (hits > 0){
+			if (hits % 7 == 0) {					
 				game.racquet.racquetLenght -= 12;
 				game.racquet2.racquetLenght -= 12;
 				Ball.DIAMETER -= 3;
-				if (pointscounter%30 == 0) {
+				if (hits%14 == 0) {
 					Game.gameSpeed -= 1;
 				}	
 			}

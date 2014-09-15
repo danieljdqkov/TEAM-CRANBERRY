@@ -11,13 +11,18 @@ import javax.swing.JPanel;
 
 @SuppressWarnings("serial")
 public class Game extends JPanel {
+	public static Game game = new Game();
 	Ball ball = new Ball(this);
 	Racquet racquet = new Racquet(this, 120, Color.RED, KeyEvent.VK_Q,
 			KeyEvent.VK_A, "left"); // second property is racquet
 									// length
 	Racquet racquet2 = new Racquet(this, 120, Color.BLACK, KeyEvent.VK_O,
 			KeyEvent.VK_L, "right");
+	
 	public static int gameSpeed = 5;
+	/////////////
+	public static int blackPoints = 0;
+	public static int redPoints = 0;
 
 	public Game() {
 		addKeyListener(new KeyListener() {
@@ -58,16 +63,11 @@ public class Game extends JPanel {
 		racquet2.paint(g2d);
 	}
 
-	public void gameOver() {
-		JOptionPane.showMessageDialog(this, "Game Over", "Game Over",
-				JOptionPane.YES_NO_OPTION);
-		
-		System.exit(ABORT);
-	}
+	
 
 	public static void main(String[] args) throws InterruptedException {
 		JFrame gameWindow = new JFrame("CRANBERRY TENNIS");
-		Game game = new Game();
+		
 		gameWindow.add(game);
 		
 		gameWindow.setSize(800, 400); // set size of the field
@@ -77,11 +77,58 @@ public class Game extends JPanel {
 		gameWindow.setLocationRelativeTo(null); // make to appear in the middle
 												// of the screen
 
+		playGame(game, gameSpeed);
+		
+	}
+
+	public static void playGame(Game game, int gameSpeed) {
 		while (true) {
 			game.move();
 			game.repaint();
-			Thread.sleep(gameSpeed);
+			try {
+				Thread.sleep(gameSpeed);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 		}
+		
+	}
+	
+	public void blackScores() {
+		if ((Game.blackPoints > Game.redPoints)&&(Game.blackPoints - Game.redPoints == 2)) {
+			JOptionPane.showMessageDialog(this, "BLACK PLAYER WINS", "Game Over",
+					JOptionPane.INFORMATION_MESSAGE);
+			System.exit(ABORT);
+		}
+		JOptionPane.showMessageDialog(this, "Black Player Scored a point!!!", "Goaaaaaaaal!!!",
+				JOptionPane.INFORMATION_MESSAGE);
+		Game.blackPoints ++;
+		System.out.println(Game.blackPoints);
+		Ball.x = 0;
+		Ball.y = 0;
+		Ball.xa = 1;
+		Ball.ya = 1;
+		playGame(game, gameSpeed);
+		
+		
+	}
+public void redScores() {
+		if ((Game.redPoints > Game.blackPoints)&&(Game.redPoints - Game.blackPoints  == 2)) {
+			JOptionPane.showMessageDialog(this, "RED PLAYER WINS !!!", "Game Over",
+					JOptionPane.INFORMATION_MESSAGE);
+			System.exit(ABORT);
+		}
+		JOptionPane.showMessageDialog(this, "Red Player Scored a point!!!", "Goaaaaaaaal!!!",
+				JOptionPane.INFORMATION_MESSAGE);
+		Game.redPoints++;
+		System.out.println(Game.redPoints);
+		Ball.x = 0;
+		Ball.y = 0;
+		Ball.xa = 1;
+		Ball.ya = 1;
+		playGame(game, gameSpeed);
+		
 	}
 }
