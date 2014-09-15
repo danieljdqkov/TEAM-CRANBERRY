@@ -20,10 +20,10 @@ public class Game extends JPanel {
 			KeyEvent.VK_L, "right");
 	
 	public static int gameSpeed = 5;
-	/////////////
-	public static int blackPoints = 0;
-	public static int redPoints = 0;
-
+/////////////////////////////////////////
+    public static int blackPoints = 0; //
+	public static int redPoints = 0;   //
+/////////////////////////////////////////
 	public Game() {
 		addKeyListener(new KeyListener() {
 
@@ -65,22 +65,7 @@ public class Game extends JPanel {
 
 	
 
-	public static void main(String[] args) throws InterruptedException {
-		JFrame gameWindow = new JFrame("CRANBERRY TENNIS");
-		
-		gameWindow.add(game);
-		
-		gameWindow.setSize(800, 400); // set size of the field
-		gameWindow.setVisible(true);
-		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		gameWindow.setResizable(false); // disable resize
-		gameWindow.setLocationRelativeTo(null); // make to appear in the middle
-												// of the screen
-
-		playGame(game, gameSpeed);
-		
-	}
-
+	
 	public static void playGame(Game game, int gameSpeed) {
 		while (true) {
 			game.move();
@@ -105,7 +90,15 @@ public class Game extends JPanel {
 		JOptionPane.showMessageDialog(this, "Black Player Scored a point!!!", "Goaaaaaaaal!!!",
 				JOptionPane.INFORMATION_MESSAGE);
 		Game.blackPoints ++;
-		System.out.println(Game.blackPoints);
+		Ball.hitCounter = 0;
+		Ball.DIAMETER = 30;
+		game.racquet.y = 150;
+		game.racquet.ya = 0;
+		game.racquet.racquetLenght = 120;
+		game.racquet2.y = 150;
+		game.racquet2.ya = 0;
+		game.racquet2.racquetLenght = 120;
+		Game.gameSpeed = 5;
 		Ball.x = 0;
 		Ball.y = 0;
 		Ball.xa = 1;
@@ -114,21 +107,46 @@ public class Game extends JPanel {
 		
 		
 	}
-public void redScores() {
+	public void redScores() {
 		if ((Game.redPoints > Game.blackPoints)&&(Game.redPoints - Game.blackPoints  == 2)) {
-			JOptionPane.showMessageDialog(this, "RED PLAYER WINS !!!", "Game Over",
-					JOptionPane.INFORMATION_MESSAGE);
-			System.exit(ABORT);
+				JOptionPane.showMessageDialog(this, "RED PLAYER WINS !!!", "Game Over",
+						JOptionPane.INFORMATION_MESSAGE);
+				System.exit(ABORT);
 		}
-		JOptionPane.showMessageDialog(this, "Red Player Scored a point!!!", "Goaaaaaaaal!!!",
-				JOptionPane.INFORMATION_MESSAGE);
-		Game.redPoints++;
-		System.out.println(Game.redPoints);
-		Ball.x = 0;
-		Ball.y = 0;
-		Ball.xa = 1;
-		Ball.ya = 1;
+			JOptionPane.showMessageDialog(this, "Red Player Scored a point!!!", "Goaaaaaaaal!!!",
+					JOptionPane.INFORMATION_MESSAGE);
+			Game.redPoints++;
+			Ball.hitCounter = 0;
+			Ball.DIAMETER = 30;
+			game.racquet.y = 150;
+			game.racquet.ya = 0;
+			game.racquet.racquetLenght = 120;
+			game.racquet2.y = 150;
+			game.racquet2.ya = 0;
+			game.racquet2.racquetLenght = 120;
+			Game.gameSpeed = 5;
+			Ball.x = 0;
+			Ball.y = 0;
+			Ball.xa = 1;
+			Ball.ya = 1;
+			playGame(game, gameSpeed);
+			
+	}
+
+public static void main(String[] args) throws InterruptedException {
+		JFrame gameWindow = new JFrame("CRANBERRY TENNIS");
+		
+		gameWindow.add(game);
+		
+		gameWindow.setSize(800, 400); // set size of the field
+		gameWindow.setVisible(true);
+		gameWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		gameWindow.setResizable(false); // disable resize
+		gameWindow.setLocationRelativeTo(null); // make to appear in the middle
+												// of the screen
+
 		playGame(game, gameSpeed);
 		
 	}
+
 }

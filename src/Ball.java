@@ -47,11 +47,11 @@ public class Ball {
 	
 	private void increaseDiff(int hits) {
 		if (hits > 0){
-			if (hits % 7 == 0) {					
+			if (hits % 3 == 0) {					
 				game.racquet.racquetLenght -= 12;
 				game.racquet2.racquetLenght -= 12;
 				Ball.DIAMETER -= 3;
-				if (hits%14 == 0) {
+				if (hits%6==0) {
 					Game.gameSpeed -= 1;
 				}	
 			}

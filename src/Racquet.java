@@ -4,7 +4,7 @@ import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 
 public class Racquet {
-	int y = 150;
+    int y = 150;
 	int ya = 0;
 	private Game game;
 	public int racquetLenght;	
