@@ -73,7 +73,6 @@ public class Game extends JPanel {
 			try {
 				Thread.sleep(gameSpeed);
 			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 
@@ -81,17 +80,30 @@ public class Game extends JPanel {
 		
 	}
 	
-	public void blackScores() {
+	public void Scores(String player) {
 		if ((Game.blackPoints > Game.redPoints)&&(Game.blackPoints - Game.redPoints == 2)) {
 			Sound.Play("GAMEOVER");	
 			JOptionPane.showMessageDialog(this, "BLACK PLAYER WINS", "Game Over",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.INFORMATION_MESSAGE);
+			System.exit(ABORT);
+		}else if ((Game.redPoints > Game.blackPoints)&&(Game.redPoints - Game.blackPoints  == 2)) {
+			Sound.Play("GAMEOVER");	
+			JOptionPane.showMessageDialog(this, "RED PLAYER WINS !!!", "Game Over",
+			JOptionPane.INFORMATION_MESSAGE);
 			System.exit(ABORT);
 		}
-		Sound.Play("GOAL");
-		JOptionPane.showMessageDialog(this, "Black Player Scored a point!!!", "Goaaaaaaaal!!!",
-				JOptionPane.INFORMATION_MESSAGE);
-		Game.blackPoints ++;
+		if (player.equals("BLACK")) {
+			Sound.Play("GOAL");
+			JOptionPane.showMessageDialog(this, "Black Player Scored a point!!!", "Goaaaaaaaal!!!",
+			JOptionPane.INFORMATION_MESSAGE);
+			Game.blackPoints ++;
+		}else if (player.equals("RED")) {
+			Sound.Play("GOAL");
+			JOptionPane.showMessageDialog(this, "Red Player Scored a point!!!", "Goaaaaaaaal!!!",
+			JOptionPane.INFORMATION_MESSAGE);
+			Game.redPoints++;
+		}
+		
 		Ball.hitCounter = 0;
 		Ball.DIAMETER = 30;
 		game.racquet.y = 150;
@@ -109,7 +121,7 @@ public class Game extends JPanel {
 		
 		
 	}
-	public void redScores() {
+	/*public void redScores() {
 		if ((Game.redPoints > Game.blackPoints)&&(Game.redPoints - Game.blackPoints  == 2)) {
 			Sound.Play("GAMEOVER");	
 			JOptionPane.showMessageDialog(this, "RED PLAYER WINS !!!", "Game Over",
@@ -136,7 +148,7 @@ public class Game extends JPanel {
 			Ball.ya = 1;
 			playGame(game, gameSpeed);
 			
-	}
+	}*/
 
 public static void main(String[] args) throws InterruptedException {
 		JFrame gameWindow = new JFrame("CRANBERRY TENNIS");

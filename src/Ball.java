@@ -18,11 +18,11 @@ public class Ball {
 
 	void move() {
 		if (Ball.x + Ball.xa < 0) {
-			game.blackScores();
+			game.Scores("BLACK");
 			
 		}
 		if (Ball.x + Ball.xa > game.getWidth() - DIAMETER) {
-			game.redScores();
+			game.Scores("RED");
 			
 		}
 		if (Ball.y + Ball.ya < 0) {
