@@ -2,16 +2,14 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import javax.swing.JOptionPane;
-
 public class Ball {
 	public static int DIAMETER = 30;
-	int x = 0;
-	int y = 0;
-	int xa = 1;
-	int ya = 1;
+	public static int x = 0;
+	public static int y = 0;
+	public static int xa = 1;
+	public static int ya = 1;
 	Color color;
-	int pointscounter = 0;
+	public static int hitCounter = 0;
 	private Game game;
 
 	public Ball(Game game) {
@@ -19,30 +17,45 @@ public class Ball {
 	}
 
 	void move() {
-		if (this.x + this.xa < 0) {
-			game.gameOver();
+		if (Ball.x + Ball.xa < 0) {
+			game.blackScores();
+			
 		}
-		if (this.x + this.xa > game.getWidth() - DIAMETER) {
-			System.out.println(game.ball.pointscounter);
-			game.gameOver();
+		if (Ball.x + Ball.xa > game.getWidth() - DIAMETER) {
+			game.redScores();
+			
 		}
-		if (this.y + this.ya < 0) {
-			this.ya = 1;
+		if (Ball.y + Ball.ya < 0) {
+			Ball.ya = 1;
 		}
-		if (this.y + this.ya > game.getHeight() - DIAMETER) {
-			this.ya = -1;
+		if (Ball.y + Ball.ya > game.getHeight() - DIAMETER) {
+			Ball.ya = -1;
 		}
 		if (leftCollision()) {
-			this.xa = 1;
-			pointscounter++;
-		}
+			Ball.xa = 1;
+			Ball.hitCounter++;
+			increaseDiff(Ball.hitCounter);
+		}							
 		if (rightCollision()) {
-			this.xa = -1;
-			pointscounter++;
+			Ball.xa = -1;
+			Ball.hitCounter++;
+			increaseDiff(Ball.hitCounter);			
+		}		
+		Ball.x = Ball.x + Ball.xa;
+		Ball.y = Ball.y + Ball.ya;
+	}
+	
+	private void increaseDiff(int hits) {
+		if (hits > 0){
+			if (hits % 3 == 0) {					
+				game.racquet.racquetLenght -= 12;
+				game.racquet2.racquetLenght -= 12;
+				Ball.DIAMETER -= 3;
+				if (hits%6==0) {
+					Game.gameSpeed -= 1;
+				}	
+			}
 		}
-		this.x = this.x + this.xa;
-		this.y = this.y + this.ya;
-
 	}
 
 	private boolean leftCollision() {
@@ -54,7 +67,7 @@ public class Ball {
 	}
 
 	public void paint(Graphics2D g) {
-		g.setColor(color.ORANGE);
+		g.setColor(Color.ORANGE);
 		g.fillOval(x, y, DIAMETER, DIAMETER);
 	}
 

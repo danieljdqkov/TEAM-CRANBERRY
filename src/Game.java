@@ -9,17 +9,21 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
+@SuppressWarnings("serial")
 public class Game extends JPanel {
+	public static Game game = new Game();
 	Ball ball = new Ball(this);
-	Racquet racquet = new Racquet(this, 80, Color.RED, KeyEvent.VK_Q,
+	Racquet racquet = new Racquet(this, 120, Color.RED, KeyEvent.VK_Q,
 			KeyEvent.VK_A, "left"); // second property is racquet
 									// length
-	Racquet racquet2 = new Racquet(this, 80, Color.BLACK, KeyEvent.VK_O,
+	Racquet racquet2 = new Racquet(this, 120, Color.BLACK, KeyEvent.VK_O,
 			KeyEvent.VK_L, "right");
-	int pointscounter = 0;
-
-	// count
-
+	
+	public static int gameSpeed = 5;
+/////////////////////////////////////////
+    public static int blackPoints = 0; //
+	public static int redPoints = 0;   //
+/////////////////////////////////////////
 	public Game() {
 		addKeyListener(new KeyListener() {
 
@@ -42,7 +46,7 @@ public class Game extends JPanel {
 
 	}
 
-	private void move() {
+	private void move() {		
 		ball.move();
 		racquet.move();
 		racquet2.move();
@@ -59,33 +63,80 @@ public class Game extends JPanel {
 		racquet2.paint(g2d);
 	}
 
-	public void gameOver() {
-		JOptionPane.showMessageDialog(this, "Game Over", "Game Over",
-				JOptionPane.YES_NO_OPTION);
+	
+
+	
+	public static void playGame(Game game, int gameSpeed) {
+		while (true) {
+			game.move();
+			game.repaint();
+			try {
+				Thread.sleep(gameSpeed);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+		}
 		
-		System.exit(ABORT);
+	}
+	
+	public void blackScores() {
+		if ((Game.blackPoints > Game.redPoints)&&(Game.blackPoints - Game.redPoints == 2)) {
+			JOptionPane.showMessageDialog(this, "BLACK PLAYER WINS", "Game Over",
+					JOptionPane.INFORMATION_MESSAGE);
+			System.exit(ABORT);
+		}
+		JOptionPane.showMessageDialog(this, "Black Player Scored a point!!!", "Goaaaaaaaal!!!",
+				JOptionPane.INFORMATION_MESSAGE);
+		Game.blackPoints ++;
+		Ball.hitCounter = 0;
+		Ball.DIAMETER = 30;
+		game.racquet.y = 150;
+		game.racquet.ya = 0;
+		game.racquet.racquetLenght = 120;
+		game.racquet2.y = 150;
+		game.racquet2.ya = 0;
+		game.racquet2.racquetLenght = 120;
+		Game.gameSpeed = 5;
+		Ball.x = 0;
+		Ball.y = 0;
+		Ball.xa = 1;
+		Ball.ya = 1;
+		playGame(game, gameSpeed);
+		
+		
+	}
+	public void redScores() {
+		if ((Game.redPoints > Game.blackPoints)&&(Game.redPoints - Game.blackPoints  == 2)) {
+				JOptionPane.showMessageDialog(this, "RED PLAYER WINS !!!", "Game Over",
+						JOptionPane.INFORMATION_MESSAGE);
+				System.exit(ABORT);
+		}
+			JOptionPane.showMessageDialog(this, "Red Player Scored a point!!!", "Goaaaaaaaal!!!",
+					JOptionPane.INFORMATION_MESSAGE);
+			Game.redPoints++;
+			Ball.hitCounter = 0;
+			Ball.DIAMETER = 30;
+			game.racquet.y = 150;
+			game.racquet.ya = 0;
+			game.racquet.racquetLenght = 120;
+			game.racquet2.y = 150;
+			game.racquet2.ya = 0;
+			game.racquet2.racquetLenght = 120;
+			Game.gameSpeed = 5;
+			Ball.x = 0;
+			Ball.y = 0;
+			Ball.xa = 1;
+			Ball.ya = 1;
+			playGame(game, gameSpeed);
+			
 	}
 
-	public static void main(String[] args) throws InterruptedException {
+public static void main(String[] args) throws InterruptedException {
 		JFrame gameWindow = new JFrame("CRANBERRY TENNIS");
-		Game game = new Game();
-		gameWindow.add(game);
 		
-		//changing difficulty block 
-		int difficultylevel = 0;
-		if (game.ball.pointscounter % 25 == 0) {
-			difficultylevel++;
-			if (difficultylevel == 1) {
-				//method for changing parameters for speed, racquets length and ball diameter 
-			}
-			if (difficultylevel == 2) {
-				//method for changing parameters for speed, racquets length and ball diameter
-			}
-			if (difficultylevel == 3) {
-				//method for changing parameters for speed, racquets length and ball diameter
-			}
-		}
-		// end block
+		gameWindow.add(game);
 		
 		gameWindow.setSize(800, 400); // set size of the field
 		gameWindow.setVisible(true);
@@ -94,11 +145,8 @@ public class Game extends JPanel {
 		gameWindow.setLocationRelativeTo(null); // make to appear in the middle
 												// of the screen
 
-		while (true) {
-			game.move();
-			game.repaint();
-			Thread.sleep(5);
-		}
-
+		playGame(game, gameSpeed);
+		
 	}
+
 }
