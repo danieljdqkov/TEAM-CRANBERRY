@@ -43,7 +43,7 @@ public class Game extends JPanel {
 			}
 		});
 		setFocusable(true);
-
+		Sound.Play("BACKGROUND");
 	}
 
 	private void move() {		
@@ -83,10 +83,12 @@ public class Game extends JPanel {
 	
 	public void blackScores() {
 		if ((Game.blackPoints > Game.redPoints)&&(Game.blackPoints - Game.redPoints == 2)) {
+			Sound.Play("GAMEOVER");	
 			JOptionPane.showMessageDialog(this, "BLACK PLAYER WINS", "Game Over",
 					JOptionPane.INFORMATION_MESSAGE);
 			System.exit(ABORT);
 		}
+		Sound.Play("GOAL");
 		JOptionPane.showMessageDialog(this, "Black Player Scored a point!!!", "Goaaaaaaaal!!!",
 				JOptionPane.INFORMATION_MESSAGE);
 		Game.blackPoints ++;
@@ -109,12 +111,15 @@ public class Game extends JPanel {
 	}
 	public void redScores() {
 		if ((Game.redPoints > Game.blackPoints)&&(Game.redPoints - Game.blackPoints  == 2)) {
-				JOptionPane.showMessageDialog(this, "RED PLAYER WINS !!!", "Game Over",
+			Sound.Play("GAMEOVER");	
+			JOptionPane.showMessageDialog(this, "RED PLAYER WINS !!!", "Game Over",
 						JOptionPane.INFORMATION_MESSAGE);
 				System.exit(ABORT);
 		}
+			Sound.Play("GOAL");
 			JOptionPane.showMessageDialog(this, "Red Player Scored a point!!!", "Goaaaaaaaal!!!",
 					JOptionPane.INFORMATION_MESSAGE);
+		
 			Game.redPoints++;
 			Ball.hitCounter = 0;
 			Ball.DIAMETER = 30;
