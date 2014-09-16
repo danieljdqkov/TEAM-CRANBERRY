@@ -53,14 +53,14 @@ public class Ball {
 	
 	private void increaseDiff(int hits) {
 		if (hits > 0) {
-				if (hits % 3 == 0){
+				if (hits % Game.difficulty == 0){
 				Sound.Play("DIFF");
-				game.racquet.racquetLenght -= 12;
-				game.racquet2.racquetLenght -= 12;
-				Ball.DIAMETER -= 3;
+				game.racquet.racquetLenght -= game.racquet.racquetLenght/10;
+				game.racquet2.racquetLenght -= game.racquet2.racquetLenght/10;
+				Ball.DIAMETER -= Ball.DIAMETER/10;
 				
-					if (hits%6==0) {
-					Game.gameSpeed -= 1;
+					if (hits % (Game.difficulty*2) == 0) {
+					Game.speed -= Game.speed/5;
 					}	
 				}
 				
