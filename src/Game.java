@@ -19,8 +19,7 @@ public class Game extends JPanel {
 	Racquet racquet2 = new Racquet(this, 120, Color.BLACK, KeyEvent.VK_O,
 			KeyEvent.VK_L, "right");
 	
-	public static int speed = 5;
-	public static int difficulty = 3; // allways >0;
+	public static int gameSpeed = 5;
 /////////////////////////////////////////
     public static int blackPoints = 0; //
 	public static int redPoints = 0;   //
@@ -101,12 +100,12 @@ public class Game extends JPanel {
 		game.racquet2.y = 150;
 		game.racquet2.ya = 0;
 		game.racquet2.racquetLenght = 120;
-		Game.speed = 5;
+		Game.gameSpeed = 5;
 		Ball.x = 0;
 		Ball.y = 0;
 		Ball.xa = 1;
 		Ball.ya = 1;
-		playGame(game, speed);
+		playGame(game, gameSpeed);
 		
 		
 	}
@@ -130,12 +129,12 @@ public class Game extends JPanel {
 			game.racquet2.y = 150;
 			game.racquet2.ya = 0;
 			game.racquet2.racquetLenght = 120;
-			Game.speed = 5;
+			Game.gameSpeed = 5;
 			Ball.x = 0;
 			Ball.y = 0;
 			Ball.xa = 1;
 			Ball.ya = 1;
-			playGame(game, speed);
+			playGame(game, gameSpeed);
 			
 	}
 
@@ -151,7 +150,7 @@ public static void main(String[] args) throws InterruptedException {
 		gameWindow.setLocationRelativeTo(null); // make to appear in the middle
 												// of the screen
 
-		playGame(game, speed);
+		playGame(game, gameSpeed);
 		
 	}
 
