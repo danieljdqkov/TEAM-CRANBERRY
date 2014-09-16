@@ -32,30 +32,40 @@ public class Ball {
 			Ball.ya = -1;
 		}
 		if (leftCollision()) {
+			Sound.Play("COLLISION");
 			Ball.xa = 1;
 			Ball.hitCounter++;
-			increaseDiff(Ball.hitCounter);
+			if(Ball.DIAMETER > 6){
+				increaseDiff(Ball.hitCounter);
+				}
 		}							
 		if (rightCollision()) {
+			Sound.Play("COLLISION");
 			Ball.xa = -1;
 			Ball.hitCounter++;
-			increaseDiff(Ball.hitCounter);			
+			if(Ball.DIAMETER > 6){
+			increaseDiff(Ball.hitCounter);
+			}
 		}		
 		Ball.x = Ball.x + Ball.xa;
 		Ball.y = Ball.y + Ball.ya;
 	}
 	
 	private void increaseDiff(int hits) {
-		if (hits > 0){
-			if (hits % 3 == 0) {					
+		if (hits > 0) {
+				if (hits % 3 == 0){
+				Sound.Play("DIFF");
 				game.racquet.racquetLenght -= 12;
 				game.racquet2.racquetLenght -= 12;
 				Ball.DIAMETER -= 3;
-				if (hits%6==0) {
+				
+					if (hits%6==0) {
 					Game.gameSpeed -= 1;
-				}	
+					}	
+				}
+				
 			}
-		}
+		
 	}
 
 	private boolean leftCollision() {

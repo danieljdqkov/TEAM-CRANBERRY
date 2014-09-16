@@ -15,8 +15,15 @@ public class Sound {
 			 File soundFile = new File("lib/sounds/background.wav");
 			 if (sound.equals("GOAL")) {
 	    		 soundFile = new File("lib/sounds/goal.wav");
-			}else if (sound.equals("GAMEOVER")) {
+			 }
+			 else if (sound.equals("GAMEOVER")) {
 				 soundFile = new File("lib/sounds/game_over.wav");
+			 }
+			 else if (sound.equals("COLLISION")) {
+				 soundFile = new File("lib/sounds/boing_spring.wav");
+			}
+			 else if (sound.equals("DIFF")) {
+				 soundFile = new File("lib/sounds/woohoo.wav");
 			}
 			 
 	         AudioInputStream audioIn = AudioSystem.getAudioInputStream(soundFile);
@@ -27,6 +34,7 @@ public class Sound {
 	         clip.open(audioIn);
 	         if (sound.equals("BACKGROUND")) {
 	        	 clip.loop(Clip.LOOP_CONTINUOUSLY);
+	        	 
 	         }else{
 	        	 clip.start();
 	         }
